@@ -15,6 +15,7 @@ public class User {
     private String mail;
     private String password;
     private UserType type;
+    private String phone;
     private List<Realty> realtyList = new ArrayList<>();
     private List<Realty>  favoriteRealtyList = new ArrayList<>();
     private List<Message> messages = new ArrayList<>();
@@ -23,12 +24,13 @@ public class User {
     public User() {
     }
 
-    public User(String name, String mail, String password, UserType type) {
+    public User(String name, String mail, String password, UserType type, String phone) {
         super();
         this.name = name;
         this.mail = mail;
         this.password = password;
         this.type = type;
+        this.phone = phone;
     }
     public String getName() {
         return name;
@@ -77,6 +79,14 @@ public class User {
     }
     public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

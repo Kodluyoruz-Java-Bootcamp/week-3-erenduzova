@@ -1,7 +1,6 @@
 package com.eren.emlakcepte.service;
 
 import com.eren.emlakcepte.model.Realty;
-import com.eren.emlakcepte.model.User;
 import com.eren.emlakcepte.model.enums.RealtyKind;
 import com.eren.emlakcepte.model.enums.RealtyStatus;
 import com.eren.emlakcepte.model.enums.UserType;
@@ -20,6 +19,9 @@ public class RealtyService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BannerService bannerService;
+
     // Create Realty by checking user's limits
     public String createRealty(Realty realty, String email) {
         realty.setUser(userService.getUserByMail(email));
@@ -34,6 +36,7 @@ public class RealtyService {
         }
         realty.setStatus(RealtyStatus.ACTIVE);
         realtyRepository.saveRealty(realty);
+        bannerService.create(bannerService.firstBanner(realty));
         return ("createRealty : " + realty.getTitle());
     }
 
