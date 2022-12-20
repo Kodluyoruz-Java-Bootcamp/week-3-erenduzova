@@ -42,7 +42,7 @@ public class RealtyService {
         realty.setStatus(RealtyStatus.ACTIVE);
         realtyRepository.saveRealty(realty);
         userService.saveToUser(realty);
-        bannerService.create(bannerService.firstBanner(realty));
+        bannerService.addBanner(bannerService.firstBanner(realty));
         return realty;
     }
 

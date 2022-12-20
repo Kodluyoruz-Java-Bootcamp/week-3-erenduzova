@@ -17,14 +17,13 @@ public class BannerController {
     private BannerService bannerService;
 
     @PostMapping
-    public Banner create(@RequestBody Banner banner) {
-        bannerService.create(banner);
-        return banner;
+    public HttpStatus create(@RequestBody Banner banner) {
+        return bannerService.addBanner(banner);
     }
 
     @GetMapping
     public ResponseEntity<List<Banner>> getAll() {
-        return new ResponseEntity<>(bannerService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(bannerService.getAllBanner(), HttpStatus.OK);
     }
 
 
