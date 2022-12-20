@@ -5,6 +5,7 @@ import com.eren.emlakcepte.model.enums.RealtyKind;
 import com.eren.emlakcepte.model.enums.RealtyStatus;
 import com.eren.emlakcepte.model.enums.UserType;
 import com.eren.emlakcepte.repository.RealtyRepository;
+import com.eren.emlakcepte.request.RealtyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,21 +24,26 @@ public class RealtyService {
     private BannerService bannerService;
 
     // Create Realty by checking user's limits
-    public String createRealty(Realty realty, String email) {
+    public Realty createRealty(RealtyRequest realtyRequest) {
+        String email = realtyRequest.getEmail();
+        Realty realty = new Realty(realtyRequest.getNo(), realtyRequest.getTitle(), realtyRequest.getStatus(), realtyRequest.getKind(), realtyRequest.getType(), realtyRequest.getProvince(), realtyRequest.getDistrict());
         realty.setUser(userService.getUserByMail(email));
         if (UserType.INDIVIDUAL.equals(realty.getUser().getType())) {
             if (!realty.getKind().equals(RealtyKind.HOUSE)) {
-                return "Individual users can have only house type realty";
+                System.out.println("Individual users can have only house type realty");
+                return null;
 
             }
             if (realty.getUser().getRealtyList().size() >= 3) {
-                return "Individual users can have max 3 realty";
+                System.out.println("Individual users can have max 3 realty");
+                return null;
             }
         }
         realty.setStatus(RealtyStatus.ACTIVE);
         realtyRepository.saveRealty(realty);
+        userService.saveToUser(realty);
         bannerService.create(bannerService.firstBanner(realty));
-        return ("createRealty : " + realty.getTitle());
+        return realty;
     }
 
     public List<Realty> getAll() {

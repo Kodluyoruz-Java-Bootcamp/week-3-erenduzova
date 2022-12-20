@@ -13,8 +13,6 @@ public class BannerService {
     @Autowired
     private BannerRepository bannerRepository;
     @Autowired
-    private RealtyService realtyService;
-    @Autowired
     private UserService userService;
 
     public void create(Banner banner) {

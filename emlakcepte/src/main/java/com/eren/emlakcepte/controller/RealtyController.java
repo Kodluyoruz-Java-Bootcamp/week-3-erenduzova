@@ -1,6 +1,7 @@
 package com.eren.emlakcepte.controller;
 
 import com.eren.emlakcepte.model.Realty;
+import com.eren.emlakcepte.request.RealtyRequest;
 import com.eren.emlakcepte.service.RealtyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,9 @@ public class RealtyController {
     }
 
     // Create Realty
-    @PostMapping(value = "/{email}/create")
-    public String create(@RequestBody Realty realty, @PathVariable String email) {
-        return realtyService.createRealty(realty, email);
+    @PostMapping
+    public Realty create(@RequestBody RealtyRequest realtyRequest) {
+        return realtyService.createRealty(realtyRequest);
     }
 
 

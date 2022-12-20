@@ -4,6 +4,7 @@ package com.eren.emlakcepte.model;
 import com.eren.emlakcepte.model.enums.RealtyKind;
 import com.eren.emlakcepte.model.enums.RealtyStatus;
 import com.eren.emlakcepte.model.enums.RealtyType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +14,7 @@ public class Realty {
     private Long no;
     private String title;
     private LocalDateTime publishedDate = LocalDateTime.now();
+    @JsonIgnore
     private User user;
     private RealtyStatus status;
     private RealtyKind kind;

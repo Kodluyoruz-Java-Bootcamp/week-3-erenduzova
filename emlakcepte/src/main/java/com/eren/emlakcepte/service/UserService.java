@@ -70,4 +70,7 @@ public class UserService {
     }
 
 
+    public void saveToUser(Realty realty) {
+        userRepository.saveRealty(realty);
+    }
 }

@@ -1,5 +1,6 @@
 package com.eren.emlakcepte.repository;
 
+import com.eren.emlakcepte.model.Realty;
 import com.eren.emlakcepte.model.User;
 import org.springframework.stereotype.Component;
 
@@ -24,4 +25,7 @@ public class UserRepository {
     }
 
 
+    public void saveRealty(Realty realty) {
+        getByMail(realty.getUser().getMail()).getRealtyList().add(realty);
+    }
 }
